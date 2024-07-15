@@ -1,28 +1,22 @@
-from selenium.webdriver.common.by import By
+from utilities.locators import Locators
 
 
-class RegisterPage:
+class RegisterPage(Locators):
 
     def __init__(self, driver):
         self.driver = driver
 
-    full_name = (By.NAME, "customerName")
-    email = (By.NAME, "email")
-    password = (By.XPATH, "//input[@type='password']")
-    check_password = (By.NAME, "passwordCheck")
-    submit_btn = (By.ID, "continue")
-
     def enter_full_name(self):
-        self.driver.find_element(*RegisterPage.full_name).send_keys("Manjunath")
+        self.driver.find_element(*self.full_name).send_keys(RegisterPage.name)
 
     def enter_email(self):
-        self.driver.find_element(*RegisterPage.email).send_keys("raju_2522@yahoo.com")
+        self.driver.find_element(*self.email).send_keys(RegisterPage.email_address)
 
     def enter_password(self):
-        self.driver.find_element(*RegisterPage.password).send_keys("Manju2522")
+        self.driver.find_element(*self.password).send_keys(RegisterPage.password_value)
 
     def confirm_password(self):
-        self.driver.find_element(*RegisterPage.check_password).send_keys("Manju2522")
+        self.driver.find_element(*self.check_password).send_keys(RegisterPage.password_check_value)
 
     def submit(self):
-        self.driver.find_element(*RegisterPage.submit_btn).click()
+        self.driver.find_element(*self.submit_btn).click()

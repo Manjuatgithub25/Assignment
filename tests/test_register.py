@@ -4,8 +4,9 @@ from selenium.common import NoSuchElementException
 from pageObjects.homepage import HomePage
 from pageObjects.puzzlepage import PuzzlePage
 from pageObjects.registerpage import RegisterPage
-from utilities.baseclass import BaseClass
 from pageObjects.captcha import CaptchaPage
+from utilities.baseclass import BaseClass
+from utilities.generic import Generic
 
 
 class TestRegister(BaseClass):
@@ -16,9 +17,6 @@ class TestRegister(BaseClass):
         register_page = RegisterPage(self.driver)
         try:
             try:
-                captcha = self.show_input_dialog("input", "Enter the captcha seen: ")
-                captcha_page.input_captcha(captcha)
-                captcha_page.submit_captcha()
                 home_page.accountslists()
                 home_page.account_creation_link()
                 register_page.enter_full_name()
@@ -38,6 +36,9 @@ class TestRegister(BaseClass):
                 register_page.submit()
 
         except NoSuchElementException:
+            captcha = self.show_input_dialog("input", "Enter the captcha seen: ")
+            captcha_page.input_captcha(captcha)
+            captcha_page.submit_captcha()
             home_page.accountslists()
             home_page.account_creation_link()
             register_page.enter_full_name()
